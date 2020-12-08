@@ -19,7 +19,7 @@ run_op.q_1gauss = 0;   % use single gaussian parameterization
 run_op.q_2gauss = 1;   % use double gaussian parameterization
 run_op.q_plots = 0;    % make plots of each spectrum fit (1 cues plots, 0 does not plot)
 run_op.remove_peak = 0;    % remove annual peak from spectra
-run_op.uncertainty = 0;    % calculate uncertainty on sigma estimate
+run_op.uncertainty = 1;    % calculate uncertainty on sigma estimate
 run_op.noise_add = 0;      % also calculate noise-adding technique
 
 % save options
@@ -29,9 +29,12 @@ save_sigma = 0;     % save diffusion lengths for each isotope
 % spectra options
 ARu = 100;      % number of poles for MEM analysis
 method = 'MEM'; % choose 'MEM' or 'MTM'
-spec_info.win_units = 'yr';    % choose to make windows either in constant time 'yr' or constant depth 'm'
-spec_info.win_len = 250;    % in whichever unit you specify above (either years or meters)
-spec_info.step_len = 250;       % in whichever unit you specify above (either years or meters)
+%spec_info.win_units = 'yr';    % choose to make windows either in constant time 'yr' or constant depth 'm'
+%spec_info.win_len = 250;    % in whichever unit you specify above (either years or meters)
+%spec_info.step_len = 250;       % in whichever unit you specify above (either years or meters)
+spec_info.win_units = 'm';    % choose to make windows either in constant time 'yr' or constant depth 'm'
+spec_info.win_len = 10;    % in whichever unit you specify above (either years or meters)
+spec_info.step_len = 10;       % in whichever unit you specify above (either years or meters)
 
 
 % Define Holocene and Glacial regimes - can use different schemes for
@@ -43,11 +46,12 @@ glacial_start = 10000; % year glacial regime begins
 % sampled at half-cm intervals.
 
 % Set parameters for creating spectra
-datafile17 = 'Version1_201520162017_5mm_interp.mat';
-% datafile = 'SPC_ISO_halfcm_Emmaavg_linearNaN_depth_d18o_dD.txt';
-datafile = 'SPC_ISO_halfcm_INSTAAR_linearNaN_depth_d18o_dD.txt';
 spec_info.save = save_spectra;
 noise_toggle = 0;
+
+% names of datafiles
+datafile17 = 'Version1_201520162017_5mm_interp.mat';
+datafile = 'SPC_ISO_halfcm_INSTAAR_linearNaN_depth_d18o_dD.txt';
 
 % load water isotope data
 data17 = load(datafile17);    % import data file
